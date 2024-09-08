@@ -33,6 +33,7 @@ const App: React.FC<AppProps> = ({ latitude, longitude }) => {
           `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
         );
         setWeatherData(response.data);
+        console.log(weatherData);
 
         // Send weather data to parent window if it exists
         if (window.parent !== window) {
@@ -52,19 +53,26 @@ const App: React.FC<AppProps> = ({ latitude, longitude }) => {
     };
 
     fetchWeatherData();
-  }, [latitude, longitude]);
+  }, [latitude, longitude, weatherData]);
 
   if (error) {
     return <div className="text-red-500">{error}</div>;
   }
 
   if (!weatherData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="bg-gradient-to-br from-blue-400 to-blue-600 min-h-screen flex items-center justify-center">
+        <div className="text-white text-center">
+          <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-white border-t-transparent mb-4"></div>
+          <p className="text-xl font-semibold animate-pulse">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="bg-gradient-to-br from-blue-400 to-blue-600 min-h-screen flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl shadow-lg p-6 max-w-sm w-full">
+      <div className="bg-whit rounded-xl shadow-lg p-6 max-w-sm w-full">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
           {weatherData.name}
         </h1>
