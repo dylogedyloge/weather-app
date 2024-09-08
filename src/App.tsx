@@ -63,15 +63,20 @@ const App: React.FC<AppProps> = ({ latitude, longitude }) => {
   }
 
   return (
-    <div className="bg-blue-100 min-h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-4">
-          Weather in {weatherData.name}
+    <div className="bg-gradient-to-br from-blue-400 to-blue-600 min-h-screen flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl shadow-lg p-6 max-w-sm w-full">
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          {weatherData.name}
         </h1>
-        <p className="text-lg">Temperature: {weatherData.main.temp}°C</p>
-        <p className="text-lg">
-          Condition: {weatherData.weather[0].description}
+        <p className="text-5xl font-semibold text-gray-700 mb-4">
+          {Math.round(weatherData.main.temp)}°C
         </p>
+        <p className="text-xl text-gray-600 capitalize">
+          {weatherData.weather[0].description}
+        </p>
+        <div className="mt-6 text-sm text-gray-500">
+          Last updated: {new Date().toLocaleTimeString()}
+        </div>
       </div>
     </div>
   );
